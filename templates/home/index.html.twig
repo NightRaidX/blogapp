@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<main role="main">
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                {% for blog in blog %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{{ vich_uploader_asset(blog, 'imageFile') }}" width="346" height="auto" alt="imageName"/>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ blog.title }}</h4>
+                            <p class="card-text">{{ blog.tekstvak | raw }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" onclick="window.location.href='{{ path('blog_show', {'id': blog.id}) }}'" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" onclick="window.location.href='{{ path('blog_edit', {'id': blog.id}) }}'" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                </div>
+                                <small class="text-muted">{{ blog.modified ? blog.modified|date('Y-m-d H:i:s') : '' }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
